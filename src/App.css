@@ -14,6 +14,38 @@ body {
   height: 100vh;
 }
 
+/* Isometric grid styling */
+.isometric-grid {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.grid-cell {
+  transform-style: preserve-3d;
+}
+
+.grid-cell:hover {
+  transform: translateZ(2px);
+}
+
+.building {
+  animation: buildingPop 0.3s ease-out;
+}
+
+@keyframes buildingPop {
+  0% {
+    transform: translateX(-50%) scale(0);
+  }
+
+  50% {
+    transform: translateX(-50%) scale(1.2);
+  }
+
+  100% {
+    transform: translateX(-50%) scale(1);
+  }
+}
+
 /* Smooth transitions for UI elements */
 .building-button {
   transition: all 0.2s ease-in-out;
@@ -41,23 +73,6 @@ body {
 
 .sidebar-scroll::-webkit-scrollbar-thumb:hover {
   background: #94A3B8;
-}
-
-/* Canvas container */
-canvas {
-  display: block;
-  outline: none;
-}
-
-/* Responsive adjustments */
-@media (width <= 768px) {
-  .sidebar {
-    width: 200px;
-  }
-  
-  .controls-overlay {
-    display: none;
-  }
 }
 
 /* Loading animation */
@@ -93,4 +108,47 @@ canvas {
 .stat-decrease {
   color: #EF4444;
   transform: scale(0.9);
+}
+
+/* Responsive adjustments */
+@media (width <= 768px) {
+  .sidebar {
+    width: 200px;
+  }
+  
+  .controls-overlay {
+    display: none;
+  }
+  
+  .isometric-grid {
+    transform: rotateX(60deg) rotateY(-45deg) scale(0.8);
+  }
+}
+
+/* Game grid hover effects */
+.grid-cell:hover .building {
+  transform: translateX(-50%) scale(1.1);
+}
+
+/* Success/error notifications */
+.notification-enter {
+  opacity: 0%;
+  transform: translateY(-20px);
+}
+
+.notification-enter-active {
+  opacity: 100%;
+  transform: translateY(0);
+  transition: all 0.3s ease-out;
+}
+
+.notification-exit {
+  opacity: 100%;
+  transform: translateY(0);
+}
+
+.notification-exit-active {
+  opacity: 0%;
+  transform: translateY(-20px);
+  transition: all 0.3s ease-in;
 }
